@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-text;
+    line-height: 1.3;
+  }
+
+  a {
+    @apply text-primary-600 hover:text-primary-700;
+  }
+
+  /* Remove default button styles */
+  button {
+    font-family: inherit;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+
+  /* Focus styles — accessible */
+  :focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Component Utilities ─────────────────────────────────────────────────── */
+@layer components {
+
+  /* Layout */
+  .page-container {
+    @apply flex-1 min-h-screen bg-background;
+  }
+
+  .page-content {
+    @apply p-6 max-w-[1400px] mx-auto;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-surface rounded-lg border border-border shadow-card;
+  }
+
+  .card-padded {
+    @apply bg-surface rounded-lg border border-border shadow-card p-6;
+  }
+
+  /* Form inputs */
+  .form-input {
+    @apply w-full px-3 py-2.5 text-sm text-text bg-surface border border-border rounded-md
+           placeholder:text-text-muted
+           focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-500
+           disabled:opacity-50 disabled:bg-slate-50 disabled:cursor-not-allowed
+           transition-colors duration-150;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-text mb-1.5;
+  }
+
+  .form-error {
+    @apply text-xs text-danger-600 mt-1;
+  }
+
+  .form-hint {
+    @apply text-xs text-text-muted mt-1;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium
+           rounded-md border transition-all duration-150 cursor-pointer
+           focus:outline-none focus:ring-2 focus:ring-offset-1
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white border-primary-600
+           hover:bg-primary-700 hover:border-primary-700
+           focus:ring-primary-300 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-500 text-white border-secondary-500
+           hover:bg-secondary-600 hover:border-secondary-600
+           focus:ring-secondary-300 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn bg-surface text-text-secondary border-border
+           hover:bg-slate-50 hover:border-slate-300
+           focus:ring-slate-200 active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply btn bg-danger-500 text-white border-danger-500
+           hover:bg-danger-600 hover:border-danger-600
+           focus:ring-danger-300 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-text-secondary border-transparent
+           hover:bg-slate-100 hover:text-text
+           focus:ring-slate-200;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+
+  .btn-icon {
+    @apply p-2 rounded-md;
+  }
+
+  /* Tables */
+  .table-wrapper {
+    @apply overflow-x-auto rounded-lg border border-border;
+  }
+
+  .table {
+    @apply w-full text-sm text-left;
+  }
+
+  .table thead {
+    @apply bg-slate-50 border-b border-border;
+  }
+
+  .table thead th {
+    @apply px-4 py-3 text-xs font-semibold text-text-secondary uppercase tracking-wide;
+  }
+
+  .table tbody tr {
+    @apply border-b border-border last:border-0 hover:bg-slate-50 transition-colors;
+  }
+
+  .table tbody td {
+    @apply px-4 py-3 text-text;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-700;
+  }
+
+  .badge-success {
+    @apply badge bg-success-100 text-success-600;
+  }
+
+  .badge-danger {
+    @apply badge bg-danger-100 text-danger-600;
+  }
+
+  .badge-warning {
+    @apply badge bg-accent-100 text-accent-600;
+  }
+
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-700;
+  }
+
+  .badge-muted {
+    @apply badge bg-slate-100 text-slate-600;
+  }
+
+  /* Stat Cards */
+  .stat-card {
+    @apply card-padded flex items-start gap-4;
+  }
+
+  .stat-icon {
+    @apply p-3 rounded-lg flex-shrink-0;
+  }
+
+  /* Sidebar */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md
+           text-slate-600 hover:bg-slate-100 hover:text-text
+           transition-colors duration-150 cursor-pointer;
+  }
+
+  .sidebar-link.active {
+    @apply bg-primary-50 text-primary-700 hover:bg-primary-100;
+  }
+
+  /* Section Header */
+  .section-title {
+    @apply text-xs font-semibold text-text-muted uppercase tracking-widest px-3 mb-1;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-border my-4;
+  }
+
+  /* Empty state */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 text-center;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+
+  .modal-content {
+    @apply bg-surface rounded-xl shadow-modal w-full max-h-[90vh] overflow-y-auto;
+  }
+}
+
+/* ─── Utility Extras ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

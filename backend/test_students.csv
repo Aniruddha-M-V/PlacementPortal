@@ -1,0 +1,3 @@
+name,email,rollNumber,batch,department,semester,section,cgpa,backlogs,phone,gender
+Alice Smith,alice@test.com,CS24005,2024-2028,Computer Science,1,A,8.5,0,9876543210,female
+Bob Jones,bob@test.com,CS24006,2024-2028,Computer Science,1,B,7.2,1,9876543211,male
