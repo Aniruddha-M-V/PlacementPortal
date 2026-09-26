@@ -6,7 +6,7 @@
  * NEVER runs automatically.
  */
 
-require("dotenv").config({ path: require("path").resolve(__dirname, "../../..", ".env") });
+require("dotenv").config({ path: require("path").resolve(__dirname, "../..", ".env") });
 const mongoose = require("mongoose");
 const readline = require("readline");
 
@@ -77,3 +77,4 @@ async function main() {
 }
 
 main().catch((e) => { console.error("Error:", e.message); mongoose.disconnect(); process.exit(1); });
+
