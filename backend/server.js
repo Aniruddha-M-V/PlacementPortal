@@ -12,7 +12,7 @@ const startServer = async () => {
   // 2. Seed default admin if first run
   await bootstrap();
 
-  const server = app.listen(PORT, () => {
+  const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
     console.log(`📡 API available at http://localhost:${PORT}/api`);
     console.log(`💊 Health check: http://localhost:${PORT}/api/health`);
@@ -38,3 +38,4 @@ const startServer = async () => {
 };
 
 startServer();
+
