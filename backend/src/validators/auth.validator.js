@@ -20,6 +20,7 @@ const changePasswordValidator = [
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
     .withMessage('Password must contain at least one uppercase letter, one lowercase letter, and one number'),
   body('confirmPassword')
+    .optional()
     .custom((value, { req }) => {
       if (value !== req.body.newPassword) {
         throw new Error('Passwords do not match');
@@ -36,3 +37,4 @@ const forgotPasswordValidator = [
 ];
 
 module.exports = { loginValidator, changePasswordValidator, forgotPasswordValidator };
+
