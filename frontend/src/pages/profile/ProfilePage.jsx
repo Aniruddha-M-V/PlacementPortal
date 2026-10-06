@@ -23,7 +23,7 @@ export default function ProfilePage() {
       updateUser(res.data.data);
       toast.success('Profile updated');
     } catch (err) {
-      const fieldMsg = err.errors?.[0]?.msg;
+      const fieldMsg = err.errors?.[0]?.message;
       toast.error(fieldMsg || err.message);
     }
   };
@@ -39,7 +39,7 @@ export default function ProfilePage() {
       pwForm.reset();
       setChangingPw(false);
     } catch (err) {
-      const fieldMsg = err.errors?.[0]?.msg;
+      const fieldMsg = err.errors?.[0]?.message;
       toast.error(fieldMsg || err.message);
     }
   };
