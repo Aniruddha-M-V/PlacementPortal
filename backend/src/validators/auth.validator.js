@@ -15,8 +15,8 @@ const changePasswordValidator = [
     .notEmpty()
     .withMessage('Current password is required'),
   body('newPassword')
-    .isLength({ min: 8 })
-    .withMessage('New password must be at least 8 characters')
+    .isLength({ min: 6 })
+    .withMessage('New password must be at least 6 characters')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
     .withMessage('Password must contain at least one uppercase letter, one lowercase letter, and one number'),
   body('confirmPassword')
@@ -37,4 +37,5 @@ const forgotPasswordValidator = [
 ];
 
 module.exports = { loginValidator, changePasswordValidator, forgotPasswordValidator };
+
 

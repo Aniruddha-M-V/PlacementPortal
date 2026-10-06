@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { User, Mail, Phone, Lock, Save, Camera } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -15,6 +15,7 @@ export default function ProfilePage() {
   });
 
   const pwForm = useForm();
+  const { formState: { errors: pwErrors } } = pwForm;
 
   const onSaveProfile = async (data) => {
     try {
@@ -22,7 +23,8 @@ export default function ProfilePage() {
       updateUser(res.data.data);
       toast.success('Profile updated');
     } catch (err) {
-      toast.error(err.message);
+      const fieldMsg = err.errors?.[0]?.msg;
+      toast.error(fieldMsg || err.message);
     }
   };
 
@@ -37,7 +39,8 @@ export default function ProfilePage() {
       pwForm.reset();
       setChangingPw(false);
     } catch (err) {
-      toast.error(err.message);
+      const fieldMsg = err.errors?.[0]?.msg;
+      toast.error(fieldMsg || err.message);
     }
   };
 
@@ -56,7 +59,7 @@ export default function ProfilePage() {
           <div className="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-2xl font-bold text-primary-700">
             {isStudent ? initials : (user?.avatar ? <img src={user.avatar} alt={user.name} className="w-20 h-20 rounded-full object-cover" /> : initials)}
           </div>
-          {/* Camera button: admin/faculty only — students strictly use formal initials avatar */}
+          {/* Camera button: admin/faculty only */}
           {!isStudent && (
             <button className="absolute -bottom-1 -right-1 w-7 h-7 bg-primary-600 text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors">
               <Camera className="w-3.5 h-3.5" />
@@ -121,7 +124,17 @@ export default function ProfilePage() {
             </div>
             <div>
               <label className="form-label">New Password</label>
-              <input type="password" {...pwForm.register('newPassword', { required: true, minLength: 8 })} className="form-input" />
+              <input
+                type="password"
+                {...pwForm.register('newPassword', {
+                  required: true,
+                  minLength: { value: 6, message: 'New password must be at least 6 characters' },
+                })}
+                className="form-input"
+              />
+              {pwErrors.newPassword && (
+                <p className="text-xs text-red-500 mt-1">{pwErrors.newPassword.message || 'New password must be at least 6 characters'}</p>
+              )}
             </div>
             <div>
               <label className="form-label">Confirm New Password</label>
